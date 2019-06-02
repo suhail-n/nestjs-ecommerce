@@ -16,7 +16,7 @@ export class AuthController {
     ) { }
 
     @Get()
-    @UseGuards(AuthGuard('jwt'))
+    @UseGuards(AuthGuard())
     async tempAuth(): Promise<{ auth: string }> {
         return { auth: 'works' };
     }

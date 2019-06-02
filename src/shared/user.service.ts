@@ -16,18 +16,12 @@ export class UserService {
     }
 
     async create(userDTO: RegisterDTO): Promise<User> {
-        console.log(userDTO);
         const { username } = userDTO;
-        console.log(username);
         const user: User = await this.userModel.findOne({ username })
-        console.log(user)
         if (user) {
-            console.log("Found user")
             throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
         }
         const createdUser: User = new this.userModel(userDTO);
-        console.log('createdUser: ' + createdUser.username)
-        console.log(createdUser)
         await createdUser.save();
         return this.sanitizeUser(createdUser);
     }
