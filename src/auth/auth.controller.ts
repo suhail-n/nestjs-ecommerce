@@ -1,12 +1,14 @@
 import { Body, Controller, Post, Get, UseGuards } from '@nestjs/common';
 
 import { UserService } from '../shared/user.service';
-// import { Payload } from '../types/payload';
 import { LoginDTO, RegisterDTO } from './auth.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { User } from '../types/user';
-// import { AuthService } from './auth.service';
+import { Payload } from '../types/payload';
+import { UserDec } from '../utilities/user.decorator';
+import { SellerGuard } from '../guards/seller.guard';
+
 
 @Controller('auth')
 export class AuthController {
@@ -21,12 +23,18 @@ export class AuthController {
         return { auth: 'works' };
     }
 
+    @Get("all")
+    @UseGuards(AuthGuard(), SellerGuard)
+    async fundAll(@UserDec() user: any) {
+        console.log(user)
+    }
+
     @Post('login')
     async login(@Body() userDTO: LoginDTO): Promise<any> {
         // find the user in database
         const user: User = await this.userService.findByLogin(userDTO);
         // add payload
-        const payload: any = {
+        const payload: Payload = {
             username: user.username,
             seller: user.seller,
         };

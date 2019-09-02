@@ -4,7 +4,7 @@ import { Product } from "./product";
 
 interface ProductOrder {
     product: Product;
-    quantity: number
+    quantity: number;
 }
 
 export interface Order extends Document {

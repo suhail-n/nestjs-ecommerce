@@ -2,11 +2,11 @@
 import { Document } from "mongoose";
 
 interface Address {
-    addr1: string,
-    addr2: string,
-    city: string,
-    country: string,
-    postal: string
+    addr1: string;
+    addr2: string;
+    city: string;
+    country: string;
+    postal: string;
 }
 
 export interface User extends Document {
@@ -14,5 +14,5 @@ export interface User extends Document {
     readonly password: string;
     seller: boolean;
     address: Address;
-    created: Date
+    created: Date;
 }

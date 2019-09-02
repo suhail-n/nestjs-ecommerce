@@ -3,9 +3,9 @@ import { User } from "./user";
 
 export interface Product extends Document {
     owner: User;
-    title: string,
-    description: string,
-    image: string,
-    price: string,
-    created: Date
+    title: string;
+    description: string;
+    image: string;
+    price: number;
+    created: Date;
 }
